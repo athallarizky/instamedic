@@ -1,0 +1,106 @@
+body {
+  font-size: 20px;
+  color: #1e1e1e;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.bgReg {
+    background-color: rgba(196, 196, 196, 0.19);
+}
+
+#wrapper {
+    display: flex;
+}
+
+#sidebar {
+    height: 100%;
+}
+
+#content-wrapper{
+    background-color:#f8f9fc;
+    width:100%;
+    overflow-x:hidden
+}
+
+#nav {
+    position: fixed;
+    top: 0;
+    background: #FFF;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 36px;
+    color: #3F3D56;
+}
+
+#nav .navbar-nav > button.nav-item {
+    border-radius: 8px;
+    margin: 2px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#navbar-nav{
+    background: #38374D;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+#nav-konten {
+    background: rgba(196, 196, 196, 0.19);
+}
+
+#header {
+    background: #FFF;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.panel {
+    height: 500px;
+    border-radius: 2px;
+}
+
+.panel>panel-body {
+    background-color:#d3d3d3;
+}
+
+footer {
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.page-footer {
+    background: #8FB9A8;
+}
+
+.footer-copyright {
+    background: #38374D;
+}
+
+.page-footer .logo{
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.form-konten {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form-konten > input {
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 36px;
+}
