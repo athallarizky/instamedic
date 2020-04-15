@@ -4,10 +4,6 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.bgReg {
-    background-color: rgba(196, 196, 196, 0.19);
-}
-
 #wrapper {
     display: flex;
 }

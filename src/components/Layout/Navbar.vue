@@ -7,7 +7,9 @@
             <form class="form-inline navbar-nav ml-auto">
                 <!-- <router-link to="/test"> -->
                 <button class="btn btnWhite mx-2" type="submit">Masuk</button>
-                <button class="btn btnGreen mx-2" type="submit">Daftar</button>
+                <router-link to="/register">
+                    <button class="btn btnGreen mx-2" type="submit">Daftar</button>
+                </router-link>
             </form>
         </div>
         </div>

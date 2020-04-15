@@ -1,13 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import Home from './components/Home'
 
 Vue.use(VueRouter);
 window.axios = require('axios')
 
+// Component
+import Home from './components/Home'
+import Register from './components/Register'
+
 const routes = [
   { path:'/', component:Home },
+  { path:'/register', component:Register},
 ];
 
 const router = new VueRouter({
