@@ -1,5 +1,5 @@
 <template>
-    <section id="Login">
+    <section id="Register">
         <div class="container">
             <h1 class="logo text-center pt-3">Instamedic</h1>
             <div class="row mx-auto">
@@ -7,8 +7,7 @@
                     <div class="card-body">
                         <div class="px-2">
                             <div class="message-info" v-if="message != ''">
-                                <div v-if="!success" class="alert alert-danger" role="alert">{{message}}</div>
-                                <div v-if="success" class="alert alert-success" role="alert">{{message}}</div>
+                                <Alerts :messages="message" :status="success" />
                             </div>
                             
                             <form class="user" @submit="formSubmit">
@@ -20,12 +19,12 @@
                                 <div class="form-group">
                                     <label for="inputUsername">Username</label>
                                     <input type="text" class="form-control form-control-user" id="inputUsername"
-                                        aria-describedby="unameHelp" placeholder="Username" v-model="username" name="username">
+                                        aria-describedby="unameHelp" placeholder="Username" v-model="username" name="username" @change="resetStatus">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail">E-mail</label>
                                     <input type="email" class="form-control form-control-user" id="inputEmail"
-                                        aria-describedby="emailHelp" placeholder="E-mail" v-model="email" name="email">
+                                        aria-describedby="emailHelp" placeholder="E-mail" v-model="email" name="email" @change="resetStatus">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Password</label>
@@ -38,7 +37,9 @@
                                 </div>
                             </form>
                             <div class="text-center">
-                                <p>Sudah punya akun? <a class="small" href="login.html">Login Sekarang!</a></p>
+                                <p>Sudah punya akun? 
+                                    <router-link to="/login"> <a href="#">Login Sekarang.</a> </router-link>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -51,6 +52,7 @@
 
 
 <script>
+import Alerts from './Shared/Alerts'
 
 export default {
     data(){
@@ -84,13 +86,21 @@ export default {
                 if(res.data.success) this.success = true
                 this.message = res.data.message
             });
+        },
+
+        resetStatus: function(){
+            this.message = '',
+            this.success = false
         }
+    },
+    components:{
+        Alerts
     }
 }
 </script>
 
 <style scoped>
-    #Login {
+    #Register {
         display: flex;
         align-items: center;
         justify-content: center;
