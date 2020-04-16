@@ -42,7 +42,6 @@ export default {
         return{
             obats: [],
             search:'',
-            isEmpty: Boolean
         }
     },
     created(){

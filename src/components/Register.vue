@@ -6,26 +6,31 @@
                 <div class="card o-hidden border-2 mx-auto card-size">
                     <div class="card-body">
                         <div class="px-2">
-                            <form class="user" action="http://localhost/instamedic-be/api/register" method="POST">
+                            <div class="message-info" v-if="message != ''">
+                                <div v-if="!success" class="alert alert-danger" role="alert">{{message}}</div>
+                                <div v-if="success" class="alert alert-success" role="alert">{{message}}</div>
+                            </div>
+                            
+                            <form class="user" @submit="formSubmit">
                                 <div class="form-group">
                                     <label for="inputName">Nama Lengkap</label>
                                     <input type="text" class="form-control form-control-user" id="inputName"
-                                        aria-describedby="nameHelp" placeholder="Nama lengkap" name="fullname">
+                                        aria-describedby="nameHelp" placeholder="Nama lengkap" v-model="fullname" name="fullname">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputUsername">Username</label>
                                     <input type="text" class="form-control form-control-user" id="inputUsername"
-                                        aria-describedby="unameHelp" placeholder="Username" name="username">
+                                        aria-describedby="unameHelp" placeholder="Username" v-model="username" name="username">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail">E-mail</label>
                                     <input type="email" class="form-control form-control-user" id="inputEmail"
-                                        aria-describedby="emailHelp" placeholder="E-mail" name="email">
+                                        aria-describedby="emailHelp" placeholder="E-mail" v-model="email" name="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Password</label>
                                     <input type="password" class="form-control form-control-user" id="inputPassword"
-                                        placeholder="Password" name="password">
+                                        placeholder="Password" v-model="password" name="password">
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btnGreen mx-auto d-block">Daftar</button>
@@ -42,6 +47,47 @@
         </div>
     </section>
 </template>
+
+
+
+<script>
+
+export default {
+    data(){
+        return{
+            fullname: '',
+            username:'',
+            email: '',
+            password:'',
+            message:'',
+            success: false,
+        }
+    },
+    methods: {
+        formSubmit: function(e){
+            e.preventDefault();
+
+            axios({
+                method:'POST',
+                url:'http://localhost/instamedic-be/api/register',
+                headers:{
+                    "Content-Type" : "application/x-www-form-urlencoded",
+                },
+                data:{
+                    fullname: this.fullname,
+                    username: this.username,
+                    email: this.email,
+                    password: this.password,
+                }
+
+            }).then( (res)=>{
+                if(res.data.success) this.success = true
+                this.message = res.data.message
+            });
+        }
+    }
+}
+</script>
 
 <style scoped>
     #Login {
