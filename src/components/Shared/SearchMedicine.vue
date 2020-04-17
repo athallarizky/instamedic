@@ -45,9 +45,7 @@ export default {
         }
     },
     created(){
-        axios.get("http://localhost/instamedic-be/api/medicine/getAll").then((response) => {
-            this.obats = response.data  
-        })
+        axios.get("http://localhost/instamedic-be/api/medicine/getAll").then(res => this.obats = res.data)
     },
     computed: {
         filterMedicines: function(){

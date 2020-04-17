@@ -5,8 +5,9 @@
         <a class="navbar-brand logo" href="#">Instamedic</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <form class="form-inline navbar-nav ml-auto">
-                <!-- <router-link to="/test"> -->
-                <button class="btn btnWhite mx-2" type="submit">Masuk</button>
+                <router-link to="/login">
+                    <button class="btn btnWhite mx-2" type="submit">Masuk</button>
+                </router-link>
                 <router-link to="/register">
                     <button class="btn btnGreen mx-2" type="submit">Daftar</button>
                 </router-link>

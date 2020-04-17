@@ -5,11 +5,10 @@
             <div class="row mx-auto">
                 <div class="card o-hidden border-2 mx-auto card-size">
                     <div class="card-body">
-                        <div class="px-2">
+                        <div class="px-2">  
                             <div class="message-info" v-if="message != ''">
                                 <Alerts :messages="message" :status="success" />
                             </div> 
-                            
                             <form class="user" @submit="formSubmit" >
                                 <div class="form-group">
                                     <label for="inputUsername">Username</label>
@@ -53,6 +52,7 @@ export default {
         }
     },
     methods: {
+
         formSubmit: function(e){
             e.preventDefault();
 
@@ -69,7 +69,11 @@ export default {
 
             }).then( (res)=>{
                 console.log(res.data)
-                if(res.data.success) this.success = true
+                if(res.data.success){
+                    this.success = true
+                    this.$store.dispatch('setToken', res.data.token)
+                    this.$store.dispatch('setUserData', res.data.token)
+                }
                 this.message = res.data.message
             });
         },
@@ -91,7 +95,7 @@ export default {
         align-items: center;
         justify-content: center;
         background-color: rgba(196, 196, 196, 0.19);
-        height: 100vh;
+        height: 100%;
     }
 
     .card-size{
