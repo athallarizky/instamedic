@@ -10,11 +10,20 @@ window.axios = require('axios')
 import Home from './components/Home'
 import Register from './components/Register'
 import Login from './components/Login'
+import Template from './components/Dashboard/Template'
+import ViewProfile from './components/Dashboard/Profile/ViewProfile'
+import UpdateProfile from './components/Dashboard/Profile/UpdateProfile';
 
 const routes = [
   { path:'/', component:Home },
   { path:'/register', component:Register},
   { path:'/login', component:Login},
+  { path:'/dashboard', component:Template,
+    children: [
+      { path:'/', component:ViewProfile },
+      { path: 'updateProfile', component:UpdateProfile}
+    ]
+  },
 ];
 
 const router = new VueRouter({

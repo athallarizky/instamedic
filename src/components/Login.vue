@@ -51,6 +51,11 @@ export default {
             success: false,
         }
     },
+
+    created(){
+        if (this.$store.state.token != '') this.$router.push({ path: '/dashboard' })
+    },
+    
     methods: {
 
         formSubmit: function(e){
@@ -68,11 +73,11 @@ export default {
                 }
 
             }).then( (res)=>{
-                console.log(res.data)
                 if(res.data.success){
                     this.success = true
                     this.$store.dispatch('setToken', res.data.token)
                     this.$store.dispatch('setUserData', res.data.token)
+                    this.$router.push({ path: '/dashboard' })
                 }
                 this.message = res.data.message
             });
@@ -95,7 +100,7 @@ export default {
         align-items: center;
         justify-content: center;
         background-color: rgba(196, 196, 196, 0.19);
-        height: 100%;
+        height: 100vh;
     }
 
     .card-size{

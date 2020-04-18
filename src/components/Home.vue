@@ -53,6 +53,9 @@ export default {
         Navbar,
         Footer,
         SearchMedicine
-    }
+    },
+    created(){
+        if (this.$store.state.token != '') this.$router.push({ path: '/dashboard' })
+    },
 }
 </script>

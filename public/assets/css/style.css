@@ -8,10 +8,6 @@ body {
     display: flex;
 }
 
-#sidebar {
-    height: 100%;
-}
-
 #content-wrapper{
     background-color:#f8f9fc;
     width:100%;

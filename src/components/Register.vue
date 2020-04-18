@@ -65,6 +65,11 @@ export default {
             success: false,
         }
     },
+
+    created(){
+        if (this.$store.state.token != '') this.$router.push({ path: '/dashboard' })
+    },
+    
     methods: {
         formSubmit: function(e){
             e.preventDefault();
@@ -83,7 +88,10 @@ export default {
                 }
 
             }).then( (res)=>{
-                if(res.data.success) this.success = true
+                if(res.data.success){
+                    this.success = true
+                    this.$router.push({ path: '/login' })
+                }
                 this.message = res.data.message
             });
         },
