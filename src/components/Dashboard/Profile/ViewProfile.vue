@@ -47,7 +47,6 @@ export default {
             username: this.$store.state.userData["username"],
             email: this.$store.state.userData["email"],
             password: this.$store.state.userData["password"],
-            
         }
     },
 }

@@ -6,17 +6,18 @@
                     <a class="navbar-brand text-white mx-auto" href="#">Instamedic</a>
                 </nav>
                 <ul class="navbar-nav">
-                    <hr class="sidebar-divider">
+                    
+
                     <li class="nav-item active mx-auto">
-                        <a class="nav-link text-white" href="adminhome.html"><span>Home</span></a>
+                        <router-link to="/" class="nav-link text-white"> Home </router-link>
                     </li>
-                    <hr class="sidebar-divider">
-                    <li class="nav-item mx-auto">
-                        <a class="nav-link text-white" href="adminobat.html"><span>Obat</span></a>
+
+                    <li class="nav-item mx-auto" v-if="this.$store.state.userData['role'] != 'user'">
+                        <router-link to="/dashboard/medicine" class="nav-link text-white"> Obat </router-link>
                     </li>
-                    <hr class="sidebar-divider">
+
                     <li class="nav-item mx-auto">
-                        <a class="nav-link text-white" href="admindokter.html"><span>Dokter</span></a>
+                        <a class="nav-link text-white" href=""><span>Dokter</span></a>
                     </li>
                 </ul>
             </div>
@@ -27,5 +28,13 @@
 <style scoped>
     #sidebar {
         height: 100%;
+    }
+
+    .nav-link{
+        text-decoration: none !important;
+    }
+
+    .nav-item{
+        padding: 15px 0 15px 0;
     }
 </style>

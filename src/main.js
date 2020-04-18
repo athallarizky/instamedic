@@ -12,16 +12,22 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Template from './components/Dashboard/Template'
 import ViewProfile from './components/Dashboard/Profile/ViewProfile'
-import UpdateProfile from './components/Dashboard/Profile/UpdateProfile';
+import UpdateProfile from './components/Dashboard/Profile/UpdateProfile'
+import ViewMedicine from './components/Dashboard/Medicine/ViewMedicine'
+import AddMedicine from './components/Dashboard/Medicine/AddMedicine'
+import UpdateMedicine from './components/Dashboard/Medicine/UpdateMedicine'
 
 const routes = [
-  { path:'/', component:Home },
+  { path:'', component:Home },
   { path:'/register', component:Register},
   { path:'/login', component:Login},
   { path:'/dashboard', component:Template,
     children: [
       { path:'/', component:ViewProfile },
-      { path: 'updateProfile', component:UpdateProfile}
+      { path:'updateProfile', component:UpdateProfile},
+      { path:'medicine', component:ViewMedicine},
+      { path:'medicine/addMedicine', component:AddMedicine},
+      { path:'medicine/updateMedicine/:id', component:UpdateMedicine, name:'updateMedicine'}
     ]
   },
 ];

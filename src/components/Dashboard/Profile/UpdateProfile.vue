@@ -1,7 +1,7 @@
 <template>
     <section id="Update-Profile">
         <div class="container">
-            <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb ">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="#"><router-link to="/dashboard">Home</router-link></a></li>
                     <li class="breadcrumb-item active">Update Profile</li>
@@ -10,7 +10,11 @@
             <div class="row">
                 
                 <div class="col-md-4">
+                    
                     <form class="form-konten col-xs-3 mt-5">
+                        <div class="message-info" v-if="message != ''">
+                            <Alerts :messages="message" :status="success" />
+                        </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
                             <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp" v-model="fullname">
@@ -43,6 +47,8 @@
 </template>
 
 <script>
+import Alerts from '../../Shared/Alerts'
+
 export default {
     data(){
         return{
@@ -50,6 +56,8 @@ export default {
             username: this.$store.state.userData["username"],
             email: this.$store.state.userData["email"],
             password: this.$store.state.userData["password"],
+            message:'',
+            success: false,
             
         }
     },
@@ -73,11 +81,14 @@ export default {
                 if(res.data.success){
                     this.success = true
                     this.$store.dispatch('setUserData', this.$store.state.token)
-                    this.$router.push({ path: '/dashboard' })
+                    // this.$router.push({ path: '/dashboard' })
                 }
                 this.message = res.data.message
             });
         }
+    },
+    components:{
+        Alerts
     }
 }
 </script>
