@@ -51,7 +51,6 @@ import Alerts from '../../Shared/Alerts'
 export default {
     data(){
         return{
-            inc:1,
             obats:[],
             message:'',
             success: false,

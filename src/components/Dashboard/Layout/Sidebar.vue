@@ -17,7 +17,7 @@
                     </li>
 
                     <li class="nav-item mx-auto">
-                        <a class="nav-link text-white" href=""><span>Dokter</span></a>
+                        <router-link to="/dashboard/doctor" class="nav-link text-white"> Dokter </router-link>
                     </li>
                 </ul>
             </div>

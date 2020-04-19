@@ -62,9 +62,11 @@ export default {
             success: false,
         }
     },
-    mounted(){
+    created(){
+        if (this.$store.state.userData['role'] == 'user') this.$router.push({ path: '/' })
         axios.get("http://localhost/instamedic-be/api/medicine/get/" + this.$route.params.id)
         .then((res) => {
+            if(res.data == null) this.$router.push({ path: '/dashboard/medicine' })
             this.name = res.data.name
             this.description = res.data.description
             this.category = res.data.category
