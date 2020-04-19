@@ -10,7 +10,7 @@
                 <div class="col-md-3 mb-5" v-for="obat in filterMedicines" :key="obat.id" >
                     <div class="card">
                         <div class="card-body">
-                            <img src="assets/img/undraw_medicine_b1ol.svg" alt="fotoObat" width="180px" class="mx-auto d-block">
+                            <img src="/assets/img/undraw_medicine_b1ol.svg" alt="fotoObat" width="180px" class="mx-auto d-block">
                             <h5 class="card-title">{{ obat.name }}</h5>
                             <p class="card-text">{{ obat.description }}.</p>
                             <p>Kategori: {{ obat.category }}</p>
@@ -20,8 +20,11 @@
                 
             </div>
             <div v-if="filterMedicines.length == 0">
-                <img src="assets/img/undraw_empty_xct9.svg" height="300px" class="mx-auto d-block mb-5">    
+                <img src="/assets/img/undraw_empty_xct9.svg" height="300px" class="mx-auto d-block mb-5">    
             </div>   
+        </div>
+        <div v-else class="search-something">
+            <img src="/assets/img/undraw_people_search_wctu.svg" height="400px" class="mx-auto d-block mb-5 mt-5">
         </div>
 
             

@@ -1,6 +1,6 @@
 <template>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="nav">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="nav">
         <div class="container">
         <a class="navbar-brand logo" href="#">Instamedic</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">

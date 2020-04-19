@@ -43,7 +43,7 @@
                     
                 </div>
                 <div class="col-md-4">
-                    <img src="/assets/img/undraw_online_cv_qy9w.svg" alt="Profil" width="500px">
+                    <img src="/assets/img/undraw_online_cv_qy9w.svg" alt="Profil" width="700px">
                 </div>
             </div>
         </div>

@@ -42,7 +42,7 @@
                     
                 </div>
                 <div class="col-md-4">
-                    <img src="/assets/img/undraw_contract_uy56.svg" alt="Profil" width="450px">
+                    <img src="/assets/img/undraw_publish_article_icso.svg" alt="Profil" width="550px">
                 </div>
             </div>
         </div>

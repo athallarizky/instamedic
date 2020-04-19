@@ -12,12 +12,16 @@
                         <router-link to="/" class="nav-link text-white"> Home </router-link>
                     </li>
 
-                    <li class="nav-item mx-auto" v-if="this.$store.state.userData['role'] != 'user'">
+                    <li class="nav-item mx-auto" >
                         <router-link to="/dashboard/medicine" class="nav-link text-white"> Obat </router-link>
                     </li>
 
-                    <li class="nav-item mx-auto">
+                    <li class="nav-item mx-auto" v-if="this.$store.state.userData['role'] == 'admin'">
                         <router-link to="/dashboard/doctor" class="nav-link text-white"> Dokter </router-link>
+                    </li>
+
+                    <li class="nav-item mx-auto" v-if="this.$store.state.userData['role'] != 'admin'">
+                        <router-link to="/dashboard/consultation" class="nav-link text-white"> Konsultasi </router-link>
                     </li>
                 </ul>
             </div>
