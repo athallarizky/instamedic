@@ -76,7 +76,7 @@ export default {
 
             axios({
                 method:'POST',
-                url:'http://localhost/instamedic-be/api/user/createDoctor',
+                url: this.$config.devServer.proxy + 'user/createDoctor',
                 headers:{
                     "Authorization" : this.$store.state.token,
                     "Content-Type" : "application/javascript",

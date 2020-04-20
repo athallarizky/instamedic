@@ -63,7 +63,7 @@ export default {
 
             axios({
                 method:'POST',
-                url:'http://localhost/instamedic-be/api/login',
+                url: this.$config.devServer.proxy +'login',
                 headers:{
                     "Content-Type" : "application/x-www-form-urlencoded",
                 },

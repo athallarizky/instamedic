@@ -64,7 +64,7 @@ export default {
     },
     created(){
         if (this.$store.state.userData['role'] == 'user') this.$router.push({ path: '/' })
-        axios.get("http://localhost/instamedic-be/api/medicine/get/" + this.$route.params.id)
+        axios.get( this.$config.devServer.proxy + "medicine/get/" + this.$route.params.id)
         .then((res) => {
             if(res.data == null) this.$router.push({ path: '/dashboard/medicine' })
             this.name = res.data.name
@@ -82,7 +82,7 @@ export default {
 
             axios({
                 method:'PUT',
-                url:'http://localhost/instamedic-be/api/medicine/update/' + this.$route.params.id,
+                url: this.$config.devServer.proxy +'medicine/update/' + this.$route.params.id,
                 headers:{
                             "Authorization" : this.$store.state.token,
                             "Content-Type" : "application/javascript",

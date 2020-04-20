@@ -1,7 +1,7 @@
 <template>
     <section id="Search-area">
         <input type="text" class="form-control search-med mx-auto mb-3" placeholder="Kamu sakit apa? ex: Batuk, Pilek, Pusing" v-model="search">
-
+    
         <!--Hasil pencarian obat-->
         <div id="resultObat" v-if="search != ''">
             <p>Hasil pencarian obat dari sakit: <b>{{search}} {{ filterMedicines.length == 0 ? 'tidak ditemukan' : ''}} </b></p>
@@ -48,7 +48,7 @@ export default {
         }
     },
     created(){
-        axios.get("http://localhost/instamedic-be/api/medicine/getAll").then(res => this.obats = res.data)
+        axios.get(this.$config.devServer.proxy + "medicine/getAll").then(res => this.obats = res.data)
     },
     computed: {
         filterMedicines: function(){

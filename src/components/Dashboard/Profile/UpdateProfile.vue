@@ -19,9 +19,14 @@
                             <label for="nama">Nama</label>
                             <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp" v-model="fullname">
                         </div>
-                        <div class="form-group col-xs-3">
+                        <div class="form-group col-xs-3" v-if="this.$store.state.userData['role'] == 'doctor'">
+                            <label for="specialist">Specialist</label>
+                            <input type="text" class="form-control" id="inputSpecialistDokter" aria-describedby="emailHelp" v-model="specialist">
+                        </div>
+                        <div class="form-group col-xs-3" >
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username">
+                            <input v-if="this.$store.state.userData['role'] == 'doctor'" type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username" readonly>
+                            <input v-else type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="email">E-mail</label>
@@ -56,6 +61,7 @@ export default {
             username: this.$store.state.userData["username"],
             email: this.$store.state.userData["email"],
             password: this.$store.state.userData["password"],
+            specialist: this.$store.state.userData["specialist"],
             message:'',
             success: false,
             
@@ -67,7 +73,7 @@ export default {
 
             axios({
                 method:'PUT',
-                url:'http://localhost/instamedic-be/api/user/update/' + this.$store.state.userData["id"],
+                url: this.$config.devServer.proxy + 'user/update/' + this.$store.state.userData["id"],
                 headers:{
                             "Authorization" : this.$store.state.token,
                             "Content-Type" : "application/javascript",

@@ -56,7 +56,7 @@ export default {
         }
     },
     created(){
-        axios.get("http://localhost/instamedic-be/api/consultation/get/" + this.$store.state.userData['username'],{
+        axios.get( this.$config.devServer.proxy + "consultation/get/" + this.$store.state.userData['username'],{
             headers: {
                 "Authorization": this.$store.state.token,
                 "Content-Type": "application/javascript",
@@ -67,7 +67,7 @@ export default {
     },
     methods:{
         deleteConsult: function(id){
-            axios.delete("http://localhost/instamedic-be/api/consultation/delete/" + id, {
+            axios.delete( this.$config.devServer.proxy + "consultation/delete/" + id, {
                 headers: {
                     "Authorization": this.$store.state.token,
                     "Content-Type": "application/javascript",

@@ -16,6 +16,10 @@
                             <label for="nama">Nama</label>
                             <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp" disabled v-model="fullname">
                         </div>
+                        <div class="form-group col-xs-3" v-if="this.$store.state.userData['role'] == 'doctor'">
+                            <label for="specialist">Specialist</label>
+                            <input type="text" class="form-control" id="inputSpecialistDokter" aria-describedby="emailHelp" disabled v-model="specialist">
+                        </div>
                         <div class="form-group col-xs-3">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" disabled v-model="username">
@@ -47,6 +51,7 @@ export default {
             username: this.$store.state.userData["username"],
             email: this.$store.state.userData["email"],
             password: this.$store.state.userData["password"],
+            specialist: this.$store.state.userData["specialist"]
         }
     },
 }

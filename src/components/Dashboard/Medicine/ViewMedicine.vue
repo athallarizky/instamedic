@@ -65,11 +65,11 @@
         },
         created() {
             // if (this.$store.state.userData['role'] == 'user') this.$router.push({ path: '/' })
-            axios.get("http://localhost/instamedic-be/api/medicine/getAll").then(res => this.obats = res.data)
+            axios.get( this.$config.devServer.proxy + "medicine/getAll").then(res => this.obats = res.data)
         },
         methods: {
             deleteMedicine: function (id) {
-                axios.delete("http://localhost/instamedic-be/api/medicine/delete/" + id, {
+                axios.delete( this.$config.devServer.proxy + "medicine/delete/" + id, {
                     headers: {
                         "Authorization": this.$store.state.token,
                         "Content-Type": "application/javascript",

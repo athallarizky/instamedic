@@ -37,7 +37,7 @@
             }
         },
         created() {
-            axios.get("http://localhost/instamedic-be/api/user/getAllDoctor", {
+            axios.get( this.$config.devServer.proxy + "user/getAllDoctor", {
                 headers: {
                     "Authorization": this.$store.state.token,
                     "Content-Type": "application/javascript",
@@ -48,7 +48,7 @@
         },
         methods: {
             deleteDoctor: function (id) {
-                axios.delete("http://localhost/instamedic-be/api/user/deleteDoctor/" + id, {
+                axios.delete( this.$config.devServer.proxy + "user/deleteDoctor/" + id, {
                     headers: {
                         "Authorization": this.$store.state.token,
                         "Content-Type": "application/javascript",
