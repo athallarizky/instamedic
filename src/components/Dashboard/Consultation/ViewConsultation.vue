@@ -25,9 +25,9 @@
                             <td>
                                 {{consultData.description}}
                             </td>
-                            <td>Dr. {{consultData.consultTo}}</td>
+                            <td > Dr. {{consultData.consultTo}}</td>
                             <td>
-                                <router-link to="/" class="btn btn-warning">
+                                <router-link :to="{name:'messageConsultation', params:{ id:consultData.id} }" class="btn btn-warning">
                                     Baca
                                 </router-link>
                                 | <button class="btn btn-danger" @click="deleteConsult(consultData.id)">Hapus</button>
@@ -39,12 +39,13 @@
                 <section id="doctor-list" v-if="this.$store.state.userData['role'] != 'doctor'">
                     <h4>List Dokter</h4>
                     <ListDoctor/>
+                    <!-- <ListDoctor @doctorData="showData($event)"/> -->
                 </section>
 
             </div>
         </div>
     </section>
-</template>
+</template> 
 
 <script>
 import ListDoctor from '../../Shared/ListDoctor'
@@ -52,20 +53,40 @@ import ListDoctor from '../../Shared/ListDoctor'
 export default {
     data(){
         return{
-            consultDatas:[],
+            consultDatas: [],
         }
     },
-    created(){
-        axios.get( this.$config.devServer.proxy + "consultation/get/" + this.$store.state.userData['username'],{
-            headers: {
-                "Authorization": this.$store.state.token,
-                "Content-Type": "application/javascript",
-            },
-        }).then((res) => {
-            this.consultDatas = res.data
-        })
+    async mounted(){
+        await this.fetchData()
     },
     methods:{
+        fetchData: async function(){
+            await axios.get( this.$config.devServer.proxy + "consultation/getAll/" + this.$store.state.userData['id'],{
+                headers: {
+                    "Authorization": this.$store.state.token,
+                    "Content-Type": "application/javascript",
+                },
+            }).then((res) => {
+                this.consultDatas = res.data
+                // Still bugs:
+                // this.showData(this.temps)
+            })
+        },
+
+        // showData: function(datax){
+        //     console.log(this.consultDatas.length)
+        //     this.temps = datax
+        //     for (let i = 0; i < this.consultDatas.length; i++) { 
+        //         for (let j = 0; j < datax.length; j++) {
+        //             if(this.consultDatas[i].consultTo == datax[j].id){
+        //                 this.consultDatas[i].fullname = datax[j].fullname
+        //             }
+                        
+                    
+        //         }
+        //     }
+        // },  
+
         deleteConsult: function(id){
             axios.delete( this.$config.devServer.proxy + "consultation/delete/" + id, {
                 headers: {

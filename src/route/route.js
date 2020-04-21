@@ -19,6 +19,7 @@ import AddDoctor from '../components/Dashboard/Doctor/AddDoctor'
 
 import ViewConsultation from '../components/Dashboard/Consultation/ViewConsultation'
 import AddConsultation from '../components/Dashboard/Consultation/AddConsultation'
+import MessageConsultation from '../components/Dashboard/Consultation/MessageConsultation'
 
 const routes = [
   { path:'', component:Home },
@@ -37,7 +38,8 @@ const routes = [
       { path:'doctor/addDoctor', component:AddDoctor},
 
       { path:'consultation', component:ViewConsultation},
-      { path:'consultation/:username', component:AddConsultation, name:'addConsultation'}
+      { path:'consultation/:username', component:AddConsultation, name:'addConsultation'},
+      { path:'consultation/message/:id', component:MessageConsultation, name:'messageConsultation'}
     ]
   },
 ];

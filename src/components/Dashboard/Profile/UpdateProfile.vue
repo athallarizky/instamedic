@@ -19,14 +19,13 @@
                             <label for="nama">Nama</label>
                             <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp" v-model="fullname">
                         </div>
-                        <div class="form-group col-xs-3" v-if="this.$store.state.userData['role'] == 'doctor'">
-                            <label for="specialist">Specialist</label>
-                            <input type="text" class="form-control" id="inputSpecialistDokter" aria-describedby="emailHelp" v-model="specialist">
-                        </div>
                         <div class="form-group col-xs-3" >
                             <label for="username">Username</label>
-                            <input v-if="this.$store.state.userData['role'] == 'doctor'" type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username" readonly>
-                            <input v-else type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username">
+                            <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username">                        
+                        </div>
+                        <div class="form-group col-xs-3" >
+                            <label for="specialist">Specialist</label>
+                            <input type="text" class="form-control" id="inputSpecialistDokter" aria-describedby="emailHelp" v-model="specialist">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="email">E-mail</label>

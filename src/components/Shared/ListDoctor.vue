@@ -36,14 +36,16 @@
                 success: false,
             }
         },
-        created() {
-            axios.get( this.$config.devServer.proxy + "user/getAllDoctor", {
+        async mounted() {
+            await axios.get( this.$config.devServer.proxy + "user/getAllDoctor", {
                 headers: {
                     "Authorization": this.$store.state.token,
                     "Content-Type": "application/javascript",
                 },
             }).then((res) => {
+                // console.log(res.data)
                 this.doctors = res.data
+                this.$emit('doctorData', this.doctors)
             })
         },
         methods: {

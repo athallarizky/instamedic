@@ -52,6 +52,7 @@ import Alerts from '../../Shared/Alerts'
 export default {
     data() {
         return {
+            doctorId:'',
             doctorName: '',
             doctorSpec: '',
             subject:'',
@@ -62,13 +63,14 @@ export default {
         }
     },
     created() {
-        axios.get("http://localhost/instamedic-be/api/user/getDoctor/" + this.$route.params.username, {
+        axios.get( this.$config.devServer.proxy +"user/getDoctorByUsername/" + this.$route.params.username, {
                 headers: {
                     "Authorization": this.$store.state.token,
                     "Content-Type": "application/javascript",
                 },
             })
             .then((res) => {
+                this.doctorId = res.data.id
                 this.doctorName = res.data.fullname
                 this.doctorSpec = res.data.specialist
             })
@@ -83,7 +85,7 @@ export default {
 
             axios({
                 method:'POST',
-                url: this.$config.devServer.proxy + 'consultation/create/' + this.$route.params.username,
+                url: this.$config.devServer.proxy + 'consultation/create/' + this.doctorId,
                 headers:{
                     "Authorization" : this.$store.state.token,
                     "Content-Type" : "application/javascript",
