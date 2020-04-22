@@ -1,5 +1,5 @@
 module.exports = {
     devServer: {
-        proxy: 'http://localhost/instamedic-be/api/',
+        proxy: 'https://instamedic-be.herokuapp.com/api/',
     }
   }
