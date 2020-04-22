@@ -8,5 +8,5 @@
         <div class="footer-copyright pt-3 pb-1 text-center">
             <p>Instamedic © 2020 | All Right Reserved</p>
         </div>
-    </footer> 
+    </footer>
 </template>

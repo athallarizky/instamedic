@@ -3,12 +3,14 @@
         <div class="container">
             <nav aria-label="breadcrumb ">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="#"><router-link to="/dashboard/doctor">Dokter</router-link></a></li>
+                    <li class="breadcrumb-item active"><a href="#">
+                            <router-link to="/dashboard/doctor">Dokter</router-link>
+                        </a></li>
                     <li class="breadcrumb-item active">Tambah Dokter</li>
                 </ol>
             </nav>
             <div class="row">
-                
+
                 <div class="col-md-4">
                     <h4>Tambah Dokter</h4>
                     <form class="form-konten col-xs-3 mt-5">
@@ -17,30 +19,35 @@
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp" v-model="fullname">
+                            <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp"
+                                v-model="fullname">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username">
+                            <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp"
+                                v-model="username">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="email">E-mail</label>
-                            <input type="text" class="form-control" id="inputEmailDokter" aria-describedby="emailHelp"  v-model="email">
+                            <input type="text" class="form-control" id="inputEmailDokter" aria-describedby="emailHelp"
+                                v-model="email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" aria-describedby="passHelp" v-model="password">
+                            <input type="password" class="form-control" id="inputPassword" aria-describedby="passHelp"
+                                v-model="password">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="specialist">Specialist</label>
-                            <input type="text" class="form-control" id="inputSpecialistDokter" aria-describedby="specialistHelp"  v-model="specialist">
+                            <input type="text" class="form-control" id="inputSpecialistDokter"
+                                aria-describedby="specialistHelp" v-model="specialist">
                         </div>
                     </form>
                     <button type="submit" class="btn btnGreen float-right" @click="insertDoctor">Simpan</button>
                     <router-link to="/dashboard">
                         <button type="submit" class="btn btnWhite float-right">Batalkan</button>
                     </router-link>
-                    
+
                 </div>
                 <div class="col-md-4">
                     <img src="/assets/img/undraw_online_cv_qy9w.svg" alt="Profil" width="700px">
@@ -51,64 +58,68 @@
 </template>
 
 <script>
-import Alerts from '../../Shared/Alerts'
+    import Alerts from '../../Shared/Alerts'
 
-export default {
-    data(){
-        return{
-            fullname: '',
-            username: '',
-            email: '',
-            password: '',
-            specialist:'',
-            
-            message:'',
-            success: false,
-        }
-    },
-    methods: {
-        insertDoctor: function(e){
-            e.preventDefault()
+    export default {
+        data() {
+            return {
+                fullname: '',
+                username: '',
+                email: '',
+                password: '',
+                specialist: '',
 
-            if(this.fullname == '' || this.username == '' || this.email == '' || this.password == '' || this.specialist == '' ){
-                return this.message = "Data tidak boleh ada yang kosong!"
+                message: '',
+                success: false,
             }
+        },
+        methods: {
+            insertDoctor: function (e) {
+                e.preventDefault()
 
-            axios({
-                method:'POST',
-                url: this.$config.devServer.proxy + 'user/createDoctor',
-                headers:{
-                    "Authorization" : this.$store.state.token,
-                    "Content-Type" : "application/javascript",
-                },
-                data:{
-                    fullname: this.fullname,
-                    username: this.username,
-                    email: this.email,
-                    password: this.password,
-                    specialist: this.specialist
+                if (this.fullname == '' || this.username == '' || this.email == '' || this.password == '' || this
+                    .specialist == '') {
+                    return this.message = "Data tidak boleh ada yang kosong!"
                 }
 
-            }).then( (res)=>{
-                if(res.data.success){
-                    this.success = true
-                    this.$router.push({ path: '/dashboard/doctor' })
-                }
-                this.message = res.data.message
-            }); 
+                axios({
+                    method: 'POST',
+                    url: this.$config.devServer.proxy + 'user/createDoctor',
+                    headers: {
+                        "Authorization": this.$store.state.token,
+                        "Content-Type": "application/javascript",
+                    },
+                    data: {
+                        fullname: this.fullname,
+                        username: this.username,
+                        email: this.email,
+                        password: this.password,
+                        specialist: this.specialist
+                    }
+
+                }).then((res) => {
+                    if (res.data.success) {
+                        this.success = true
+                        this.$router.push({
+                            path: '/dashboard/doctor'
+                        })
+                    }
+                    this.message = res.data.message
+                });
+            }
+        },
+        components: {
+            Alerts
         }
-    },
-    components:{
-        Alerts
     }
-}
 </script>
 
 <style scoped>
-.btn{
+    .btn {
         margin-right: 10px;
         width: 120px;
     }
+
     .btnGreen {
         color: white;
         background: #8FB9A8;
@@ -116,7 +127,7 @@ export default {
         border-radius: 8px;
     }
 
-    .btnGreen:hover{
+    .btnGreen:hover {
         color: white;
         background: #729486;
     }
@@ -133,12 +144,12 @@ export default {
         background: #8FB9A8;
     }
 
-    .input-photo{
+    .input-photo {
         width: 300px;
     }
 
 
-    .button-area{
+    .button-area {
         margin-top: 30px;
     }
 </style>

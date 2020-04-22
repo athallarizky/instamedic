@@ -3,33 +3,39 @@
         <div class="container">
             <nav aria-label="breadcrumb ">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="#"><router-link to="/dashboard">Home</router-link></a></li>
+                    <li class="breadcrumb-item active"><a href="#">
+                            <router-link to="/dashboard">Home</router-link>
+                        </a></li>
                     <li class="breadcrumb-item active">Update Profile</li>
                 </ol>
             </nav>
             <div class="row">
-                
+
                 <div class="col-md-4">
-                    
+
                     <form class="form-konten col-xs-3 mt-5">
                         <div class="message-info" v-if="message != ''">
                             <Alerts :messages="message" :status="success" />
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp" v-model="fullname">
+                            <input type="text" class="form-control" id="inputNamaDokter" aria-describedby="nameHelp"
+                                v-model="fullname">
                         </div>
-                        <div class="form-group col-xs-3" >
+                        <div class="form-group col-xs-3">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp" v-model="username">                        
+                            <input type="text" class="form-control" id="inputUnameDokter" aria-describedby="unameHelp"
+                                v-model="username">
                         </div>
-                        <div class="form-group col-xs-3" >
+                        <div class="form-group col-xs-3" v-if="$store.state.userData['role'] == 'doctor'">
                             <label for="specialist">Specialist</label>
-                            <input type="text" class="form-control" id="inputSpecialistDokter" aria-describedby="emailHelp" v-model="specialist">
+                            <input type="text" class="form-control" id="inputSpecialistDokter"
+                                aria-describedby="emailHelp" v-model="specialist">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="email">E-mail</label>
-                            <input type="text" class="form-control" id="inputEmailDokter" aria-describedby="emailHelp" readonly v-model="email">
+                            <input type="text" class="form-control" id="inputEmailDokter" aria-describedby="emailHelp"
+                                readonly v-model="email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -40,7 +46,7 @@
                     <router-link to="/dashboard">
                         <button type="submit" class="btn btnWhite float-right">Batalkan</button>
                     </router-link>
-                    
+
                 </div>
                 <div class="col-md-4">
                     <img src="/assets/img/undraw_social_friends_nsbv.svg" alt="Profil" width="500px">
@@ -51,60 +57,62 @@
 </template>
 
 <script>
-import Alerts from '../../Shared/Alerts'
+    import Alerts from '../../Shared/Alerts'
 
-export default {
-    data(){
-        return{
-            fullname: this.$store.state.userData["fullname"],
-            username: this.$store.state.userData["username"],
-            email: this.$store.state.userData["email"],
-            password: this.$store.state.userData["password"],
-            specialist: this.$store.state.userData["specialist"],
-            message:'',
-            success: false,
-            
+    export default {
+        data() {
+            return {
+                fullname: this.$store.state.userData["fullname"],
+                username: this.$store.state.userData["username"],
+                email: this.$store.state.userData["email"],
+                password: this.$store.state.userData["password"],
+                specialist: this.$store.state.userData["specialist"],
+                message: '',
+                success: false,
+
+            }
+        },
+        methods: {
+            updateUser: function (e) {
+                e.preventDefault()
+
+                axios({
+                    method: 'PUT',
+                    url: this.$config.devServer.proxy + 'user/update/' + this.$store.state.userData["id"],
+                    headers: {
+                        "Authorization": this.$store.state.token,
+                        "Content-Type": "application/javascript",
+                    },
+                    data: {
+                        fullname: this.fullname,
+                        username: this.username,
+                    }
+
+                }).then((res) => {
+                    if (res.data.success) {
+                        this.success = true
+                        this.$store.dispatch('setUserData', this.$store.state.token)
+                        // this.$router.push({ path: '/dashboard' })
+                    }
+                    this.message = res.data.message
+                });
+            }
+        },
+        components: {
+            Alerts
         }
-    },
-    methods:{
-        updateUser: function(e){
-            e.preventDefault()
-
-            axios({
-                method:'PUT',
-                url: this.$config.devServer.proxy + 'user/update/' + this.$store.state.userData["id"],
-                headers:{
-                            "Authorization" : this.$store.state.token,
-                            "Content-Type" : "application/javascript",
-                        },
-                data:{
-                    fullname: this.fullname,
-                    username: this.username,
-                }
-
-            }).then( (res)=>{
-                if(res.data.success){
-                    this.success = true
-                    this.$store.dispatch('setUserData', this.$store.state.token)
-                    // this.$router.push({ path: '/dashboard' })
-                }
-                this.message = res.data.message
-            });
-        }
-    },
-    components:{
-        Alerts
     }
-}
 </script>
 
 <style scoped>
-    .form-control{
+    .form-control {
         width: 350px;
     }
-    .btn{
+
+    .btn {
         margin-right: 10px;
     }
+
     .btnGreen {
         color: white;
         background: #8FB9A8;
@@ -112,7 +120,7 @@ export default {
         border-radius: 8px;
     }
 
-    .btnGreen:hover{
+    .btnGreen:hover {
         color: white;
         background: #729486;
     }

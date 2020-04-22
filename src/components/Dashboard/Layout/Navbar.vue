@@ -10,33 +10,35 @@
 </template>
 
 <script>
-export default {
-    methods:{
-        signOut: function(){
-            this.$store.dispatch('unsetToken')
-            this.$store.dispatch('unsetUserData')
-            this.$router.push({ path: '/' })
+    export default {
+        methods: {
+            signOut: function () {
+                this.$store.dispatch('unsetToken')
+                this.$store.dispatch('unsetUserData')
+                this.$router.push({
+                    path: '/'
+                })
+            }
         }
     }
-}
 </script>
 
 <style scoped>
-    #Dashboard-Navbar{
+    #Dashboard-Navbar {
         margin-left: 16.666667%;
         padding: 0 2.5%;
         background: #dfe4ea;
     }
 
-    .signout-button{
-        border:none;
+    .signout-button {
+        border: none;
         border-radius: 5px;
         padding: 5px 20px;
         color: #FFF;
         background: #747d8c;
     }
 
-    .signout-button:hover{
+    .signout-button:hover {
         background: #57606f;
     }
 </style>

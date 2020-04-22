@@ -14,21 +14,20 @@
                 </router-link>
             </div>
 
-            <ListDoctor/>
-    
+            <ListDoctor />
+
         </div>
     </section>
 </template>
 
 <script>
-import ListDoctor from '../../Shared/ListDoctor'
+    import ListDoctor from '../../Shared/ListDoctor'
 
-export default{
-    components:{
-        ListDoctor
+    export default {
+        components: {
+            ListDoctor
+        }
     }
-}
-
 </script>
 
 <style scoped>

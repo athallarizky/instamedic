@@ -9,22 +9,25 @@
                             <div class="message-info" v-if="message != ''">
                                 <Alerts :messages="message" :status="success" />
                             </div>
-                            
+
                             <form class="user" @submit="formSubmit">
                                 <div class="form-group">
                                     <label for="inputName">Nama Lengkap</label>
                                     <input type="text" class="form-control form-control-user" id="inputName"
-                                        aria-describedby="nameHelp" placeholder="Nama lengkap" v-model="fullname" name="fullname">
+                                        aria-describedby="nameHelp" placeholder="Nama lengkap" v-model="fullname"
+                                        name="fullname">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputUsername">Username</label>
                                     <input type="text" class="form-control form-control-user" id="inputUsername"
-                                        aria-describedby="unameHelp" placeholder="Username" v-model="username" name="username" @change="resetStatus">
+                                        aria-describedby="unameHelp" placeholder="Username" v-model="username"
+                                        name="username" @change="resetStatus">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail">E-mail</label>
                                     <input type="email" class="form-control form-control-user" id="inputEmail"
-                                        aria-describedby="emailHelp" placeholder="E-mail" v-model="email" name="email" @change="resetStatus">
+                                        aria-describedby="emailHelp" placeholder="E-mail" v-model="email" name="email"
+                                        @change="resetStatus">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Password</label>
@@ -37,7 +40,7 @@
                                 </div>
                             </form>
                             <div class="text-center">
-                                <p>Sudah punya akun? 
+                                <p>Sudah punya akun?
                                     <router-link to="/login"> <a href="#">Login Sekarang.</a> </router-link>
                                 </p>
                             </div>
@@ -52,59 +55,63 @@
 
 
 <script>
-import Alerts from './Shared/Alerts'
+    import Alerts from './Shared/Alerts'
 
-export default {
-    data(){
-        return{
-            fullname: '',
-            username:'',
-            email: '',
-            password:'',
-            message:'',
-            success: false,
-        }
-    },
-
-    created(){
-        if (this.$store.state.token != '') this.$router.push({ path: '/dashboard' })
-    },
-    
-    methods: {
-        formSubmit: function(e){
-            e.preventDefault();
-
-            axios({
-                method:'POST',
-                url: this.$config.devServer.proxy + 'register',
-                headers:{
-                    "Content-Type" : "application/x-www-form-urlencoded",
-                },
-                data:{
-                    fullname: this.fullname,
-                    username: this.username,
-                    email: this.email,
-                    password: this.password,
-                }
-
-            }).then( (res)=>{
-                if(res.data.success){
-                    this.success = true
-                    this.$router.push({ path: '/login' })
-                }
-                this.message = res.data.message
-            });
+    export default {
+        data() {
+            return {
+                fullname: '',
+                username: '',
+                email: '',
+                password: '',
+                message: '',
+                success: false,
+            }
         },
 
-        resetStatus: function(){
-            this.message = '',
-            this.success = false
+        created() {
+            if (this.$store.state.token != '') this.$router.push({
+                path: '/dashboard'
+            })
+        },
+
+        methods: {
+            formSubmit: function (e) {
+                e.preventDefault();
+
+                axios({
+                    method: 'POST',
+                    url: this.$config.devServer.proxy + 'register',
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    data: {
+                        fullname: this.fullname,
+                        username: this.username,
+                        email: this.email,
+                        password: this.password,
+                    }
+
+                }).then((res) => {
+                    if (res.data.success) {
+                        this.success = true
+                        this.$router.push({
+                            path: '/login'
+                        })
+                    }
+                    this.message = res.data.message
+                });
+            },
+
+            resetStatus: function () {
+                this.message = '',
+                    this.success = false
+            }
+        },
+        components: {
+            Alerts
         }
-    },
-    components:{
-        Alerts
     }
-}
 </script>
 
 <style scoped>
@@ -116,11 +123,11 @@ export default {
         height: 100vh;
     }
 
-    .card-size{
+    .card-size {
         width: 400px;
     }
 
-    .btn{
+    .btn {
         padding: 10px 25px;
     }
 
@@ -131,7 +138,7 @@ export default {
         border-radius: 8px;
     }
 
-    .btnGreen:hover{
+    .btnGreen:hover {
         color: white;
         background: #729486;
     }

@@ -1,10 +1,21 @@
 <template>
     <section id="Message-Consultation">
         <div class="container">
-            <!--Chat Konsultasi-->
+            <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="#">
+                            <router-link to="/dashboard/consultation">Konsultasi</router-link>
+                        </a></li>
+                    <li class="breadcrumb-item active">Pesan Konsultasi</li>
+                </ol>
+            </nav>
             <div class="row">
                 <div class="col-md-5">
-                    <h5>Pesan dikirim oleh: {{ $store.state.userData['id'] != consultData.createdBy ? consultData.createdBy : consultData.consultTo }}</h5>
+                    <h5>Pesan dikirim oleh:
+                        {{ $store.state.userData['id'] != consultData.createdBy ? consultData.createdBy : consultData.consultTo }}
+                    </h5>
+                    
+                    <!--Chat Konsultasi-->
                     <div class="panel">
                         <div class="panel-heading bg-dark p-2">
                             <div class="row">
@@ -26,8 +37,6 @@
                                     <p>{{ messageData.body }}</p>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="panel-footer bg-dark p-2">
                             <div class="input-group">
@@ -55,7 +64,7 @@
             return {
                 messageDatas: [],
                 consultData: Object,
-                messageBody:'',
+                messageBody: '',
             }
         },
         async mounted() {
@@ -63,8 +72,8 @@
             await this.fetchMessage()
         },
         methods: {
-            fetchConsultData: async function(){
-                await axios.get( this.$config.devServer.proxy + "consultation/get/" + this.$route.params.id,{
+            fetchConsultData: async function () {
+                await axios.get(this.$config.devServer.proxy + "consultation/get/" + this.$route.params.id, {
                     headers: {
                         "Authorization": this.$store.state.token,
                         "Content-Type": "application/javascript",
@@ -76,8 +85,9 @@
             },
 
             fetchMessage: async function () {
-                await axios.get(this.$config.devServer.proxy + "consultation/message/get/" + this.$route.params.id,{
-                    headers: {
+                await axios.get(this.$config.devServer.proxy + "consultation/message/get/" + this.$route.params
+                    .id, {
+                        headers: {
                             "Authorization": this.$store.state.token,
                             "Content-Type": "application/javascript",
                         },
@@ -86,26 +96,27 @@
                     this.messageDatas = res.data
                 })
             },
-            
-            sendMessage: function(){
+
+            sendMessage: function () {
                 axios({
-                    method:'POST',
-                    url: this.$config.devServer.proxy + 'consultation/message/create/' + this.$route.params.id,
-                    headers:{
-                        "Authorization" : this.$store.state.token,
-                        "Content-Type" : "application/javascript",
+                    method: 'POST',
+                    url: this.$config.devServer.proxy + 'consultation/message/create/' + this.$route.params
+                        .id,
+                    headers: {
+                        "Authorization": this.$store.state.token,
+                        "Content-Type": "application/javascript",
                     },
-                    data:{
+                    data: {
                         body: this.messageBody
                     }
 
-                }).then( (res)=>{
-                    if(res.data.success){
+                }).then((res) => {
+                    if (res.data.success) {
                         this.success = true
                         this.$router.go(this.$router.currentRoute)
                     }
                     this.message = res.data.message
-                }); 
+                });
             }
         }
     }

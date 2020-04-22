@@ -15,7 +15,8 @@
                             v-if=" $store.state.userData['role'] == 'admin'" @click="deleteDoctor(doctor.id)">
                             Hapus
                         </button>
-                        <router-link v-else :to="{name:'addConsultation', params:{ username:doctor.username} }" class="btn btn-warning d-block mx-auto btnGreen">
+                        <router-link v-else :to="{name:'addConsultation', params:{ username:doctor.username} }"
+                            class="btn btn-warning d-block mx-auto btnGreen">
                             Konsultasi
                         </router-link>
                     </div>
@@ -37,7 +38,7 @@
             }
         },
         async mounted() {
-            await axios.get( this.$config.devServer.proxy + "user/getAllDoctor", {
+            await axios.get(this.$config.devServer.proxy + "user/getAllDoctor", {
                 headers: {
                     "Authorization": this.$store.state.token,
                     "Content-Type": "application/javascript",
@@ -50,7 +51,7 @@
         },
         methods: {
             deleteDoctor: function (id) {
-                axios.delete( this.$config.devServer.proxy + "user/deleteDoctor/" + id, {
+                axios.delete(this.$config.devServer.proxy + "user/deleteDoctor/" + id, {
                     headers: {
                         "Authorization": this.$store.state.token,
                         "Content-Type": "application/javascript",
@@ -78,7 +79,7 @@
         border-radius: 8px;
     }
 
-    .btnGreen:hover{
+    .btnGreen:hover {
         color: white;
         background: #729486;
     }

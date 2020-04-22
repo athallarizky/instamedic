@@ -28,16 +28,22 @@
                         </div>
                         <div class="form-group">
                             <label for="subjek">Subjek</label>
-                            <input type="text" class="form-control input-con-data" id="inputSubjek" aria-describedby="subjekHelp" v-model="subject" placeholder="misal : ciri-ciri penyakit jantung">
+                            <input type="text" class="form-control input-con-data" id="inputSubjek"
+                                aria-describedby="subjekHelp" v-model="subject"
+                                placeholder="misal : ciri-ciri penyakit jantung">
                         </div>
                         <div class="form-group col-xs-3">
                             <label for="desc">Deskripsi</label>
-                            <textarea class="form-control input-con-data" aria-label="With textarea" v-model="description" required placeholder="misal : saya ingin bertanya tentang ciri-ciri penyakit jantung"></textarea>
+                            <textarea class="form-control input-con-data" aria-label="With textarea"
+                                v-model="description" required
+                                placeholder="misal : saya ingin bertanya tentang ciri-ciri penyakit jantung"></textarea>
                         </div>
-                        
+
                     </form>
-                    <p class="mb-4"> <b>*)</b> sebelum memulai percakapan kamu harus memasukan subjek dan deskripsi pesan terlebih dahulu. </p>
-                    <button type="submit" class="btn btnGreen mx-auto d-block" @click="insertConsult">Mulai Percakapan</button>
+                    <p class="mb-4"> <b>*)</b> sebelum memulai percakapan kamu harus memasukan subjek dan deskripsi
+                        pesan terlebih dahulu. </p>
+                    <button type="submit" class="btn btnGreen mx-auto d-block" @click="insertConsult">Mulai
+                        Percakapan</button>
                 </div>
                 <div class="col-md-5 pt-5">
                     <img src="/assets/img/undraw_share_opinion_jpw0.svg" alt="Profil" width="600px">
@@ -48,69 +54,71 @@
 </template>
 
 <script>
-import Alerts from '../../Shared/Alerts'
-export default {
-    data() {
-        return {
-            doctorId:'',
-            doctorName: '',
-            doctorSpec: '',
-            subject:'',
-            description:'',
+    import Alerts from '../../Shared/Alerts'
+    export default {
+        data() {
+            return {
+                doctorId: '',
+                doctorName: '',
+                doctorSpec: '',
+                subject: '',
+                description: '',
 
-            message:'',
-            success: false,
-        }
-    },
-    created() {
-        axios.get( this.$config.devServer.proxy +"user/getDoctorByUsername/" + this.$route.params.username, {
-                headers: {
-                    "Authorization": this.$store.state.token,
-                    "Content-Type": "application/javascript",
-                },
-            })
-            .then((res) => {
-                this.doctorId = res.data.id
-                this.doctorName = res.data.fullname
-                this.doctorSpec = res.data.specialist
-            })
-    },
-    methods: {
-        insertConsult: function(e){
-            e.preventDefault();
-
-            if(this.subject == '' || this.description == ''){
-                return this.message = "Data tidak boleh ada yang kosong!"
+                message: '',
+                success: false,
             }
+        },
+        created() {
+            axios.get(this.$config.devServer.proxy + "user/getDoctorByUsername/" + this.$route.params.username, {
+                    headers: {
+                        "Authorization": this.$store.state.token,
+                        "Content-Type": "application/javascript",
+                    },
+                })
+                .then((res) => {
+                    this.doctorId = res.data.id
+                    this.doctorName = res.data.fullname
+                    this.doctorSpec = res.data.specialist
+                })
+        },
+        methods: {
+            insertConsult: function (e) {
+                e.preventDefault();
 
-            axios({
-                method:'POST',
-                url: this.$config.devServer.proxy + 'consultation/create/' + this.doctorId,
-                headers:{
-                    "Authorization" : this.$store.state.token,
-                    "Content-Type" : "application/javascript",
-                },
-                data:{
-                    subject: this.subject,
-                    description: this.description,
+                if (this.subject == '' || this.description == '') {
+                    return this.message = "Data tidak boleh ada yang kosong!"
                 }
 
-            }).then( (res)=>{
-                if(res.data.success){
-                    this.success = true
-                    this.$router.push({ path: '/dashboard/consultation' })
-                }
-                this.message = res.data.message
-            }); 
+                axios({
+                    method: 'POST',
+                    url: this.$config.devServer.proxy + 'consultation/create/' + this.doctorId,
+                    headers: {
+                        "Authorization": this.$store.state.token,
+                        "Content-Type": "application/javascript",
+                    },
+                    data: {
+                        subject: this.subject,
+                        description: this.description,
+                    }
+
+                }).then((res) => {
+                    if (res.data.success) {
+                        this.success = true
+                        this.$router.push({
+                            path: '/dashboard/consultation'
+                        })
+                    }
+                    this.message = res.data.message
+                });
+            }
+        },
+        components: {
+            Alerts
         }
-    },
-    components:{
-        Alerts
     }
-}
 </script>
 <style scoped>
-    .input-con-data{
+    .input-con-data {
         font-family: inherit;
     }
 
@@ -122,7 +130,7 @@ export default {
         border-radius: 8px;
     }
 
-    .btnGreen:hover{
+    .btnGreen:hover {
         color: white;
         background: #729486;
     }

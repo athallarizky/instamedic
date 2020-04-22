@@ -2,17 +2,17 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="nav">
         <div class="container">
-        <a class="navbar-brand logo" href="#">Instamedic</a>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <form class="form-inline navbar-nav ml-auto">
-                <router-link to="/login">
-                    <button class="btn btnWhite mx-2" type="submit">Masuk</button>
-                </router-link>
-                <router-link to="/register">
-                    <button class="btn btnGreen mx-2" type="submit">Daftar</button>
-                </router-link>
-            </form>
-        </div>
+            <a class="navbar-brand logo" href="#">Instamedic</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <form class="form-inline navbar-nav ml-auto">
+                    <router-link to="/login">
+                        <button class="btn btnWhite mx-2" type="submit">Masuk</button>
+                    </router-link>
+                    <router-link to="/register">
+                        <button class="btn btnGreen mx-2" type="submit">Daftar</button>
+                    </router-link>
+                </form>
+            </div>
         </div>
     </nav>
 </template>
@@ -38,7 +38,7 @@
         border-radius: 8px;
     }
 
-    .btnGreen:hover{
+    .btnGreen:hover {
         color: white;
         background: #729486;
     }

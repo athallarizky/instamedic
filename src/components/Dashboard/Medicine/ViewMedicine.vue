@@ -34,7 +34,8 @@
                             <td>{{ obat.description }}</td>
                             <td>{{ obat.category }}</td>
                             <td>
-                                <router-link :to="{name:'updateMedicine', params:{ id:obat.id} }" class="btn btn-warning">
+                                <router-link :to="{name:'updateMedicine', params:{ id:obat.id} }"
+                                    class="btn btn-warning">
                                     Edit
                                 </router-link>
                                 | <button class="btn btn-danger" @click="deleteMedicine(obat.id)">hapus</button>
@@ -45,7 +46,7 @@
             </section>
             <section id="user-view" v-else>
                 <h4>Cari Obat</h4>
-                <SearchMedicine class="search-medicine"/>
+                <SearchMedicine class="search-medicine" />
             </section>
         </div>
     </section>
@@ -65,11 +66,11 @@
         },
         created() {
             // if (this.$store.state.userData['role'] == 'user') this.$router.push({ path: '/' })
-            axios.get( this.$config.devServer.proxy + "medicine/getAll").then(res => this.obats = res.data)
+            axios.get(this.$config.devServer.proxy + "medicine/getAll").then(res => this.obats = res.data)
         },
         methods: {
             deleteMedicine: function (id) {
-                axios.delete( this.$config.devServer.proxy + "medicine/delete/" + id, {
+                axios.delete(this.$config.devServer.proxy + "medicine/delete/" + id, {
                     headers: {
                         "Authorization": this.$store.state.token,
                         "Content-Type": "application/javascript",
@@ -102,7 +103,7 @@
         border: none;
     }
 
-    .search-medicine >>> .search-med{
+    .search-medicine>>>.search-med {
         width: 100%;
     }
 </style>
